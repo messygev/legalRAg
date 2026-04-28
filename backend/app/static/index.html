@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal RAG Bescheid-Kompass</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Legal RAG <span>Bescheid-Kompass</span></h1>
+    <p>Keine Rechtsberatung · beleggestützte Analyse</p>
+  </header>
+  <main class="layout">
+    <section class="card">
+      <h2>Recherche</h2>
+      <form id="searchForm">
+        <input id="query" placeholder="z. B. Was ist ein Verwaltungsakt?" required minlength="3" />
+        <input id="effectiveDate" type="date" required />
+        <button>Suchen</button>
+      </form>
+      <pre id="searchResult" class="result"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Bescheid-Analyse</h2>
+      <form id="noticeForm">
+        <textarea id="noticeText" rows="10" placeholder="Bescheidtext hier einfügen ..." required minlength="20"></textarea>
+        <div class="row">
+          <input id="receivedDate" type="date" />
+          <input id="noticeEffectiveDate" type="date" required />
+        </div>
+        <button>Analysieren</button>
+      </form>
+      <pre id="noticeResult" class="result"></pre>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
