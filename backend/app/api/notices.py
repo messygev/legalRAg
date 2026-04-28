@@ -9,6 +9,7 @@ from app.notices.checklist import build_notice_checklist
 from app.notices.deadline import calculate_one_month_deadline
 from app.notices.extractor import extract_notice_fields
 from app.notices.norm_mentions import extract_notice_norm_mentions
+from app.notices.injection_filter import sanitize_untrusted_document_text
 from app.notices.sectionizer import sectionize_notice
 from app.schemas.notice import (
     ChecklistItemResponse,
@@ -25,9 +26,10 @@ router = APIRouter(prefix="/v1/notices")
 
 @router.post("/analyze-text", response_model=NoticeAnalyzeResponse)
 def analyze_text(request: NoticeAnalyzeTextRequest) -> NoticeAnalyzeResponse:
-    sections = sectionize_notice(request.text)
-    fields = extract_notice_fields(request.text)
-    mentions = extract_notice_norm_mentions(request.text)
+    sanitized_text, _injection_findings = sanitize_untrusted_document_text(request.text)
+    sections = sectionize_notice(sanitized_text)
+    fields = extract_notice_fields(sanitized_text)
+    mentions = extract_notice_norm_mentions(sanitized_text)
     checklist = build_notice_checklist(sections, fields, mentions, matched_basis={})
     anchor = request.received_date or date.today()
     deadline = calculate_one_month_deadline(anchor)
