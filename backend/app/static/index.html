@@ -15,24 +15,33 @@
     <section class="card">
       <h2>Recherche</h2>
       <form id="searchForm">
+        <label for="query">Frage</label>
         <input id="query" placeholder="z. B. Was ist ein Verwaltungsakt?" required minlength="3" />
+        <label for="effectiveDate">Gültigkeitsdatum</label>
         <input id="effectiveDate" type="date" required />
         <button>Suchen</button>
       </form>
-      <pre id="searchResult" class="result"></pre>
+      <pre id="searchResult" class="result" aria-live="polite"></pre>
     </section>
 
     <section class="card">
       <h2>Bescheid-Analyse</h2>
       <form id="noticeForm">
+        <label for="noticeText">Bescheidtext</label>
         <textarea id="noticeText" rows="10" placeholder="Bescheidtext hier einfügen ..." required minlength="20"></textarea>
         <div class="row">
-          <input id="receivedDate" type="date" />
-          <input id="noticeEffectiveDate" type="date" required />
+          <div>
+            <label for="receivedDate">Empfangsdatum</label>
+            <input id="receivedDate" type="date" />
+          </div>
+          <div>
+            <label for="noticeEffectiveDate">Stichtag</label>
+            <input id="noticeEffectiveDate" type="date" required />
+          </div>
         </div>
         <button>Analysieren</button>
       </form>
-      <pre id="noticeResult" class="result"></pre>
+      <pre id="noticeResult" class="result" aria-live="polite"></pre>
     </section>
   </main>
   <script src="/static/app.js"></script>
